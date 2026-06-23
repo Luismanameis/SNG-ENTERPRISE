@@ -6,446 +6,124 @@
     <title>Suruka Enterprise Premium Executive Terminal</title>
     <style>
         :root {
-            --bg-color: #060913;
-            --surface-color: #0b1120;
-            --card-hover: #131b2e;
-            --border-color: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-red: #f43f5e;
-            --accent-green: #10b981;
-            --accent-blue: #3b82f6;
-            --gold: #f59e0b;
+            --bg-color: #060913; --surface-color: #0b1120; --card-hover: #131b2e;
+            --border-color: #1e293b; --text-primary: #f8fafc; --text-secondary: #94a3b8;
+            --accent-red: #f43f5e; --accent-green: #10b981; --accent-blue: #3b82f6;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            padding-top: 210px; /* Space for the fixed header terminal */
-            padding-left: 24px;
-            padding-right: 24px;
-            padding-bottom: 40px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color); color: var(--text-primary);
+            line-height: 1.5; padding: 180px 24px 40px 24px;
         }
-
-        /* Fixed Top Dashboard Terminal */
         .fixed-header-terminal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--bg-color);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 12px 24px 0 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: fixed; top: 0; left: 0; width: 100%; background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color); z-index: 1000; padding: 12px 24px 0 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-        }
-
-        .brand-meta {
-            flex-shrink: 0;
-        }
-
-        .brand-meta h1 {
-            font-size: 20px;
-            font-weight: 900;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            line-height: 1.1;
-        }
-
-        .brand-meta p {
-            color: var(--text-secondary);
-            font-size: 11px;
-            margin-top: 2px;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        /* Compact Fixed System Intel Box */
+        .header-content { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+        .brand-meta h1 { font-size: 20px; font-weight: 900; text-transform: uppercase; }
+        .brand-meta p { color: var(--text-secondary); font-size: 11px; font-weight: 600; text-transform: uppercase; }
         .executive-intel-banner {
             background: linear-gradient(135deg, #111c3a 0%, #0b1120 100%);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            border-radius: 8px;
-            padding: 10px 16px;
-            flex-grow: 1;
-            max-width: 75%;
+            border: 1px solid rgba(59,130,246,0.25); border-radius: 8px; padding: 10px 16px; flex-grow: 1; max-width: 75%;
         }
-
-        .intel-title {
-            color: var(--accent-blue);
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 2px;
-        }
-
-        .intel-text {
-            color: #cbd5e1;
-            font-size: 12.5px;
-            line-height: 1.4;
-        }
-
-        /* Continuous Live Ticker for This Year Monthly Profits */
-        .live-ticker-container {
-            width: 100vw;
-            margin-left: -24px;
-            background: #0b1329;
-            border-top: 1px solid var(--border-color);
-            margin-top: 10px;
-            overflow: hidden;
-            position: relative;
-            height: 32px;
-            display: flex;
-            align-items: center;
-        }
-
-        .ticker-wrap {
-            display: flex;
-            width: 100%;
-        }
-
-        .ticker-track {
-            display: flex;
-            gap: 50px;
-            padding-left: 24px;
-            white-space: nowrap;
-            animation: continuousScroll 25s linear infinite;
-        }
-
-        .ticker-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            color: var(--text-secondary);
-        }
-
-        .ticker-label {
-            color: #e2e8f0;
-        }
-
-        .ticker-value {
-            color: var(--accent-green);
-            font-family: SFMono-Regular, Consolas, monospace;
-        }
-
-        @keyframes continuousScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Main Scrollable Layout Container */
-        .dashboard-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* Accordion Module Layout */
-        .accordion-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .accordion-item {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .accordion-item:hover {
-            border-color: #334155;
-            background-color: var(--card-hover);
-        }
-
-        .accordion-trigger {
-            width: 100%;
-            background: none;
-            border: none;
-            padding: 22px 28px;
-            text-align: left;
-            color: var(--text-primary);
-            font-size: 16px;
-            font-weight: 800;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .accordion-trigger::after {
-            content: '+';
-            font-size: 22px;
-            color: var(--accent-red);
-            font-weight: 300;
-            transition: transform 0.2s ease;
-        }
-
-        .accordion-item.active .accordion-trigger::after {
-            content: '−';
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
-            background-color: #070c16;
-        }
-
-        .accordion-item.active .accordion-content {
-            max-height: 5000px;
-            transition: max-height 0.4s cubic-bezier(1, 0, 1, 0);
-        }
-
-        .content-inner {
-            padding: 32px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* Analysis Breakdown Panels */
-        .analysis-block {
-            background: rgba(30, 41, 59, 0.25);
-            border-left: 4px solid var(--accent-blue);
-            padding: 20px;
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 28px;
-        }
-
-        .analysis-block.red-brand {
-            border-left-color: var(--accent-red);
-        }
-
-        .analysis-title {
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-        }
-
-        .analysis-text {
-            font-size: 14px;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-
-        .analysis-bullets {
-            margin-top: 12px;
-            padding-left: 18px;
-        }
-
-        .analysis-bullets li {
-            font-size: 14px;
-            color: #cbd5e1;
-            margin-bottom: 8px;
-        }
-
-        /* Metric Grid Architecture */
-        .metric-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 14px;
-            margin-bottom: 28px;
-        }
-
-        .metric-card {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .metric-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .metric-value {
-            font-size: 24px;
-            font-weight: 700;
-            margin-top: 6px;
-            font-family: SFMono-Regular, Consolas, monospace;
-        }
-
+        .intel-title { color: var(--accent-blue); font-size: 11px; font-weight: 800; text-transform: uppercase; }
+        .intel-text { color: #cbd5e1; font-size: 12.5px; }
+        .live-ticker-container { width: 100vw; margin-left: -24px; background: #0b1329; border-top: 1px solid var(--border-color); margin-top: 10px; overflow: hidden; height: 32px; display: flex; align-items: center; }
+        .ticker-track { display: flex; gap: 50px; padding-left: 24px; white-space: nowrap; animation: continuousScroll 25s linear infinite; }
+        .ticker-item { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); }
+        .ticker-label { color: #e2e8f0; }
+        .ticker-value { color: var(--accent-green); font-family: monospace; }
+        @keyframes continuousScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .dashboard-container { max-width: 1400px; margin: 0 auto; }
+        .accordion-wrapper { display: flex; flex-direction: column; gap: 16px; }
+        .accordion-item { background-color: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+        .accordion-item:hover { border-color: #334155; background-color: var(--card-hover); }
+        .accordion-trigger { width: 100%; background: none; border: none; padding: 20px 28px; text-align: left; color: var(--text-primary); font-size: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .accordion-trigger::after { content: '+'; font-size: 22px; color: var(--accent-red); }
+        .accordion-item.active .accordion-trigger::after { content: '−'; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: #070c16; }
+        .accordion-item.active .accordion-content { max-height: 2500px; }
+        .content-inner { padding: 24px; border-top: 1px solid var(--border-color); }
+        .analysis-block { background: rgba(30,41,59,0.25); border-left: 4px solid var(--accent-blue); padding: 16px; border-radius: 0 8px 8px 0; margin-bottom: 20px; }
+        .analysis-block.red-brand { border-left-color: var(--accent-red); }
+        .analysis-title { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px; }
+        .analysis-text, .analysis-bullets li { font-size: 13.5px; color: #cbd5e1; }
+        .analysis-bullets { margin-top: 8px; padding-left: 18px; }
+        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .metric-card { background-color: var(--surface-color); border: 1px solid var(--border-color); padding: 16px; border-radius: 8px; }
+        .metric-label { font-size: 11px; color: var(--text-secondary); font-weight: 700; text-transform: uppercase; }
+        .metric-value { font-size: 22px; font-weight: 700; margin-top: 4px; font-family: monospace; }
         .metric-value.green { color: var(--accent-green); }
         .metric-value.white { color: var(--text-primary); }
-        .metric-value.red { color: var(--accent-red); }
-
-        /* Modern Data Tables */
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background-color: var(--bg-color);
-            margin-bottom: 16px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            min-width: 900px;
-        }
-
-        th, td {
-            padding: 14px 20px;
-            font-size: 14px;
-        }
-
-        th {
-            background-color: #0f172a;
-            color: var(--text-primary);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 0.06em;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        td {
-            border-bottom: 1px solid rgba(30, 41, 59, 0.4);
-            color: #e2e8f0;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background-color: rgba(30, 41, 59, 0.15);
-        }
-
-        .txt-green { color: var(--accent-green) !important; font-weight: 600; }
-        .txt-red { color: var(--accent-red) !important; font-weight: 600; }
-        .txt-bold { font-weight: 700; }
-
-        @media (max-width: 1024px) {
-            body { padding-top: 260px; }
-            .header-content { flex-direction: column; align-items: flex-start; gap: 12px; }
-            .executive-intel-banner { max-width: 100%; width: 100%; }
-        }
-
-        @media (max-width: 768px) {
-            body { padding-left: 12px; padding-right: 12px; }
-            .accordion-trigger { padding: 18px 20px; font-size: 14px; }
-            .content-inner { padding: 16px; }
-            .metric-value { font-size: 20px; }
-        }
+        .table-responsive { width: 100%; overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-color); margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 850px; }
+        th, td { padding: 12px 16px; font-size: 13px; }
+        th { background-color: #0f172a; color: var(--text-primary); font-weight: 700; text-transform: uppercase; font-size: 11px; border-bottom: 1px solid var(--border-color); }
+        td { border-bottom: 1px solid rgba(30,41,59,0.4); color: #e2e8f0; }
+        tr:hover td { background-color: rgba(30,41,59,0.15); }
+        .txt-green { color: var(--accent-green) !important; }
+        .txt-red { color: var(--accent-red) !important; }
+        @media (max-width: 1024px) { body { padding-top: 240px; } .header-content { flex-direction: column; align-items: flex-start; gap: 12px; } .executive-intel-banner { max-width: 100%; width: 100%; } }
     </style>
 </head>
 <body>
 
 <div class="fixed-header-terminal">
     <div class="header-content">
-        <div class="brand-meta">
-            <h1>Suruka Natures Gift</h1>
-            <p>6-Year Executive Terminal</p>
-        </div>
+        <div class="brand-meta"><h1>Suruka Natures Gift</h1><p>6-Year Executive Terminal</p></div>
         <div class="executive-intel-banner">
-            <div class="intel-title">System Intel</div>
-            <div class="intel-text">
-                Chief, financials have been fully reconciled. Long metrics packed into high-level strategic units (e.g., <strong>₦12.5m</strong>). Click segments below to review.
-            </div>
+            <div class="intel-title">System Intel — Live Updates Integrated</div>
+            <div class="intel-text">Chief, June actuals processed. YTD Revenue hit <strong>₦300.23m</strong>. June efficiency spiked to <strong>301.33%</strong> with a massive <strong>567.11%</strong> ad return.</div>
         </div>
     </div>
-    
     <div class="live-ticker-container">
-        <div class="ticker-wrap">
-            <div class="ticker-track">
-                <div class="ticker-item"><span class="ticker-label">JAN PROFIT:</span><span class="ticker-value">104.01%</span></div>
-                <div class="ticker-item"><span class="ticker-label">FEB PROFIT:</span><span class="ticker-value">189.85%</span></div>
-                <div class="ticker-item"><span class="ticker-label">MAR PROFIT:</span><span class="ticker-value">209.35%</span></div>
-                <div class="ticker-item"><span class="ticker-label">APR PROFIT:</span><span class="ticker-value">190.56%</span></div>
-                <div class="ticker-item"><span class="ticker-label">MAY PROFIT:</span><span class="ticker-value">177.62%</span></div>
-                <div class="ticker-item"><span class="ticker-label">JUN PROFIT:</span><span class="ticker-value">242.53%</span></div>
-                <div class="ticker-item"><span class="ticker-label">JAN PROFIT:</span><span class="ticker-value">104.01%</span></div>
-                <div class="ticker-item"><span class="ticker-label">FEB PROFIT:</span><span class="ticker-value">189.85%</span></div>
-                <div class="ticker-item"><span class="ticker-label">MAR PROFIT:</span><span class="ticker-value">209.35%</span></div>
-                <div class="ticker-item"><span class="ticker-label">APR PROFIT:</span><span class="ticker-value">190.56%</span></div>
-                <div class="ticker-item"><span class="ticker-label">MAY PROFIT:</span><span class="ticker-value">177.62%</span></div>
-                <div class="ticker-item"><span class="ticker-label">JUN PROFIT:</span><span class="ticker-value">242.53%</span></div>
-            </div>
+        <div class="ticker-track">
+            <div class="ticker-item"><span class="ticker-label">JAN PROFIT:</span><span class="ticker-value">104.01%</span></div>
+            <div class="ticker-item"><span class="ticker-label">FEB PROFIT:</span><span class="ticker-value">189.85%</span></div>
+            <div class="ticker-item"><span class="ticker-label">MAR PROFIT:</span><span class="ticker-value">209.35%</span></div>
+            <div class="ticker-item"><span class="ticker-label">APR PROFIT:</span><span class="ticker-value">190.56%</span></div>
+            <div class="ticker-item"><span class="ticker-label">MAY PROFIT:</span><span class="ticker-value">177.62%</span></div>
+            <div class="ticker-item"><span class="ticker-label">JUN PROFIT:</span><span class="ticker-value">301.33%</span></div>
+            <div class="ticker-item"><span class="ticker-label">YTD REVENUE:</span><span class="ticker-value">₦300.23m</span></div>
+            <div class="ticker-item"><span class="ticker-label">6Y GROSS:</span><span class="ticker-value">₦2.02b</span></div>
         </div>
     </div>
 </div>
 
 <div class="dashboard-container">
     <div class="accordion-wrapper">
-
-        <div class="accordion-item">
+        
+        <!-- MODULE 1: THIS YEAR -->
+        <div class="accordion-item active">
             <button class="accordion-trigger" onclick="toggleAccordion(this)">This Year — Revenue, Expenses & Profit</button>
             <div class="accordion-content">
                 <div class="content-inner">
                     <div class="analysis-block">
-                        <div class="analysis-title">Strategic Breakdown & Analytics (2026 Run-Rate)</div>
-                        <div class="analysis-text">
-                            H1 2026 exhibits high capital efficiency with an aggregate Gross Revenue of <strong>₦277.07m</strong> against total overheads of <strong>₦101.12m</strong>, generating a massive net return.
-                        </div>
+                        <div class="analysis-title">H1 2026 Close Dashboard</div>
+                        <div class="analysis-text">June actuals completely shifted the trajectory. Gross revenue reached <strong>₦300.23m</strong> while total overhead control remained robust under <strong>₦105.87m</strong>.</div>
                         <ul class="analysis-bullets">
-                            <li><strong>Margin Peak Performance:</strong> June recorded the highest profitability efficiency of the year at <strong>242.53%</strong>, generating <strong>₦16.93m</strong> in profit from a compressed monthly spend of just <strong>₦6.98m</strong>.</li>
-                            <li><strong>Volume Dynamics:</strong> Q1 maintained the highest velocity, processing 17,324 units over 2,297 customer interactions. Q2 saw a strategic shift toward premium order values, driving excellent profit ratios on fewer customer touchpoints.</li>
+                            <li><strong>Efficiency Outlier:</strong> June posted a record breaking <strong>301.33%</strong> general profit efficiency, capitalizing on 3,678 units sold.</li>
                         </ul>
                     </div>
-
                     <div class="metric-grid">
-                        <div class="metric-card"><div class="metric-label">Gross Revenue (YTD)</div><div class="metric-value green">₦277.07m</div></div>
-                        <div class="metric-card"><div class="metric-label">Total Spent Overheads</div><div class="metric-value white">₦101.12m</div></div>
-                        <div class="metric-card"><div class="metric-label">Active H1 Volume</div><div class="metric-value white">29,868 Units</div></div>
+                        <div class="metric-card"><div class="metric-label">Gross Revenue (YTD)</div><div class="metric-value green">₦300.23m</div></div>
+                        <div class="metric-card"><div class="metric-label">Total Spent Overheads</div><div class="metric-value white">₦105.87m</div></div>
+                        <div class="metric-card"><div class="metric-label">H1 Net Profit</div><div class="metric-value green">₦194.36m</div></div>
+                        <div class="metric-card"><div class="metric-label">Units Dispatched</div><div class="metric-value white">31,520</div></div>
                     </div>
-
                     <div class="table-responsive">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>Month</th>
-                                    <th>Gross Revenue</th>
-                                    <th>Spent</th>
-                                    <th>Customers</th>
-                                    <th>Unit Sold</th>
-                                    <th>Net Profit</th>
-                                    <th>Profit %</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>Month</th><th>Gross Revenue</th><th>Spent</th><th>Customers</th><th>Unit Sold</th><th>Net Profit</th><th>Profit %</th></tr></thead>
                             <tbody>
-                                <tr><td>January</td><td>₦50,165,785.00</td><td>₦24,589,339.00</td><td>782 Customers</td><td>5,683 Units</td><td class="txt-green">₦25,576,445.88</td><td class="txt-green">104.01%</td></tr>
-                                <tr><td>February</td><td>₦53,258,050.00</td><td>₦18,374,343.00</td><td>757 Customers</td><td>5,855 Units</td><td class="txt-green">₦34,883,706.75</td><td class="txt-green">189.85%</td></tr>
-                                <tr><td>March</td><td>₦53,772,200.00</td><td>₦17,382,352.00</td><td>758 Customers</td><td>5,786 Units</td><td class="txt-green">₦36,389,848.00</td><td class="txt-green">209.35%</td></tr>
-                                <tr><td>April</td><td>₦47,933,858.00</td><td>₦16,497,283.00</td><td>695 Customers</td><td>5,434 Units</td><td class="txt-green">₦31,436,574.75</td><td class="txt-green">190.56%</td></tr>
-                                <tr><td>May</td><td>₦48,028,450.00</td><td>₦17,300,152.00</td><td>624 Customers</td><td>5,084 Units</td><td class="txt-green">₦30,728,297.75</td><td class="txt-green">177.62%</td></tr>
-                                <tr><td>June</td><td>₦23,912,495.00</td><td>₦6,981,062.00</td><td>326 Customers</td><td>2,026 Units</td><td class="txt-green">₦16,931,433.13</td><td class="txt-green">242.53%</td></tr>
-                                <tr style="color: var(--text-secondary);"><td>July - Dec</td><td>₦0.00</td><td>₦0.00</td><td>0 Customers</td><td>0 Units</td><td>₦0.00</td><td>0.00%</td></tr>
+                                <tr><td>January</td><td>₦50,165,785.00</td><td>₦24,589,339.00</td><td>782</td><td>5,683</td><td class="txt-green">₦25,576,445.88</td><td class="txt-green">104.01%</td></tr>
+                                <tr><td>February</td><td>₦53,258,050.00</td><td>₦18,374,343.00</td><td>757</td><td>5,855</td><td class="txt-green">₦34,883,706.75</td><td class="txt-green">189.85%</td></tr>
+                                <tr><td>March</td><td>₦53,772,200.00</td><td>₦17,382,352.00</td><td>758</td><td>5,786</td><td class="txt-green">₦36,389,848.00</td><td class="txt-green">209.35%</td></tr>
+                                <tr><td>April</td><td>₦47,933,858.00</td><td>₦16,497,283.00</td><td>695</td><td>5,434</td><td class="txt-green">₦31,436,574.75</td><td class="txt-green">190.56%</td></tr>
+                                <tr><td>May</td><td>₦48,028,450.00</td><td>₦17,300,152.00</td><td>624</td><td>5,084</td><td class="txt-green">₦30,728,297.75</td><td class="txt-green">177.62%</td></tr>
+                                <tr><td>June</td><td>₦47,072,856.00</td><td>₦11,729,207.00</td><td>592</td><td>3,678</td><td class="txt-green">₦35,343,649.00</td><td class="txt-green">301.33%</td></tr>
+                                <tr style="background-color: #0f172a; font-weight: 800;"><td>TOTAL</td><td>₦300,231,199.00</td><td>₦105,872,677.00</td><td>4,208</td><td>31,520</td><td class="txt-green">₦194,358,522.00</td><td class="txt-green">183.58%</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -453,223 +131,25 @@
             </div>
         </div>
 
+        <!-- MODULE 2: AD PERFORMANCE -->
         <div class="accordion-item">
-            <button class="accordion-trigger" onclick="toggleAccordion(this)">Last Year — Revenue, Expenses & Profit</button>
+            <button class="accordion-trigger" onclick="toggleAccordion(this)">Focus on Ads & Content — This Year</button>
             <div class="accordion-content">
                 <div class="content-inner">
                     <div class="analysis-block">
-                        <div class="analysis-title">Strategic Breakdown & Analytics (2025 Retrospective)</div>
-                        <div class="analysis-text">
-                            2025 was a historical scale phase for Suruka, generating a total Gross Revenue of <strong>₦875.74m</strong> across 17,716 unique customer acquisitions.
-                        </div>
-                        <ul class="analysis-bullets">
-                            <li><strong>Peak Revenue Quarters:</strong> Q3 showed explosive performance, with July (<strong>₦88.67m</strong>) and September (<strong>₦87.00m</strong>) setting records for transactional pipeline velocity.</li>
-                            <li><strong>Efficiency Benchmarks:</strong> April recorded the highest profit margin of the year at <strong>235.27%</strong>, driven by optimized digital spend and streamlined inventory turnaround times.</li>
-                        </ul>
+                        <div class="analysis-title">Paid Acquisition Funnel & Content Splitting</div>
+                        <div class="analysis-text">June saw high optimization: Ad spend lowered to <strong>₦2.19m</strong> paired with <strong>₦1.21m</strong> in content production, yielding an unprecedented <strong>567.11%</strong> return on acquisition pipelines.</div>
                     </div>
-
                     <div class="table-responsive">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>2025 Month</th>
-                                    <th>Gross Revenue</th>
-                                    <th>Spent Overhead</th>
-                                    <th>Customers</th>
-                                    <th>Unit Sold</th>
-                                    <th>Net Profit</th>
-                                    <th>Profit %</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>January</td><td>₦84,457,862.00</td><td>₦33,298,747.00</td><td>1,773 Customers</td><td>11,304 Units</td><td class="txt-green">₦51,159,115.00</td><td class="txt-green">153.64%</td></tr>
-                                <tr><td>February</td><td>₦58,573,477.81</td><td>₦23,331,836.00</td><td>1,173 Customers</td><td>7,775 Units</td><td class="txt-green">₦35,241,641.81</td><td class="txt-green">151.05%</td></tr>
-                                <tr><td>March</td><td>₦57,012,782.80</td><td>₦17,499,482.00</td><td>1,139 Customers</td><td>8,109 Units</td><td class="txt-green">₦39,513,300.80</td><td class="txt-green">225.80%</td></tr>
-                                <tr><td>April</td><td>₦54,256,321.00</td><td>₦16,182,897.00</td><td>1,052 Customers</td><td>7,891 Units</td><td class="txt-green">₦38,073,424.00</td><td class="txt-green">235.27%</td></tr>
-                                <tr><td>May</td><td>₦61,898,519.18</td><td>₦22,998,196.00</td><td>1,270 Customers</td><td>9,128 Units</td><td class="txt-green">₦38,900,323.18</td><td class="txt-green">169.15%</td></tr>
-                                <tr><td>June</td><td>₦83,774,649.00</td><td>₦31,660,930.00</td><td>1,901 Customers</td><td>14,912 Units</td><td class="txt-green">₦52,113,719.00</td><td class="txt-green">164.60%</td></tr>
-                                <tr><td>July</td><td>₦88,668,142.00</td><td>₦36,514,644.00</td><td>1,735 Customers</td><td>13,335 Units</td><td class="txt-green">₦52,153,498.00</td><td class="txt-green">142.83%</td></tr>
-                                <tr><td>August</td><td>₦82,273,322.00</td><td>₦28,683,458.00</td><td>1,585 Customers</td><td>11,468 Units</td><td class="txt-green">₦53,589,864.00</td><td class="txt-green">186.83%</td></tr>
-                                <tr><td>September</td><td>₦87,001,381.00</td><td>₦26,121,811.00</td><td>1,729 Customers</td><td>13,434 Units</td><td class="txt-green">₦60,879,570.00</td><td class="txt-green">233.06%</td></tr>
-                                <tr><td>October</td><td>₦73,648,478.00</td><td>₦24,298,162.00</td><td>1,511 Customers</td><td>12,391 Units</td><td class="txt-green">₦49,350,316.00</td><td class="txt-green">203.10%</td></tr>
-                                <tr><td>November</td><td>₦63,780,693.00</td><td>₦19,769,404.00</td><td>1,198 Customers</td><td>9,999 Units</td><td class="txt-green">₦44,011,289.00</td><td class="txt-green">222.62%</td></tr>
-                                <tr><td>December</td><td>₦80,395,309.00</td><td>₦34,254,718.00</td><td>1,624 Customers</td><td>13,647 Units</td><td class="txt-green">₦46,140,591.00</td><td class="txt-green">134.70%</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <button class="accordion-trigger" onclick="toggleAccordion(this)">Last 6 Years — Revenue, Expenses & Profit</button>
-            <div class="accordion-content">
-                <div class="content-inner">
-                    <div class="analysis-block">
-                        <div class="analysis-title">6-Year Multi-Lifecycle Scale Assessment</div>
-                        <div class="analysis-text">
-                            Suruka has generated a cumulative <strong>₦2.00b</strong> in Gross Revenue and <strong>₦1.25b</strong> in Net Revenue over the last 6 years, tracing a powerful trajectory from a boutique setup to a scalable market leader.
-                        </div>
-                        <ul class="analysis-bullets">
-                            <li><strong>The Scale Inflexion Point (2024–2025):</strong> Revenue grew by 93.3% year-on-year in 2025, supported by expanding log infrastructure and scaled digital acquisitions.</li>
-                            <li><strong>Human Capital ROI:</strong> Staff structure optimized cleanly from 21 members in 2024 to 15 in 2026. This streamlined core group increased productivity significantly, handling higher transaction volumes with lower operational friction.</li>
-                            <li><strong>Client Equity:</strong> Total customer base reached 49,510, with a strong repeat customer rate of <strong>14,599</strong>—proving sustained product-market fit and excellent retention.</li>
-                        </ul>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>TAG</th>
-                                    <th>TOTAL IN 6 YEARS</th>
-                                    <th>2021</th>
-                                    <th>2022</th>
-                                    <th>2023</th>
-                                    <th>2024</th>
-                                    <th>2025</th>
-                                    <th>2026</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td><strong>Gross Revenue</strong></td><td class="txt-green">₦1,999,350,331.55</td><td>₦116,852,641.00</td><td>₦122,267,505.00</td><td>₦154,451,067.25</td><td>₦452,967,343.51</td><td class="txt-green">₦875,740,936.79</td><td>₦277,070,838.00</td></tr>
-                                <tr><td><strong>Gross Expenses</strong></td><td class="txt-red">₦752,397,800.28</td><td>₦40,176,948.08</td><td>₦45,122,746.56</td><td>₦50,000,515.89</td><td>₦201,358,773.00</td><td class="txt-red">₦314,614,285.00</td><td>₦101,124,531.75</td></tr>
-                                <tr><td><strong>Logistics Expenses</strong></td><td>₦137,000,523.00</td><td>₦0.00</td><td>₦0.00</td><td>₦0.00</td><td>₦44,450,254.00</td><td>₦74,474,713.00</td><td>₦18,075,556.00</td></tr>
-                                <tr><td><strong>Digital Expenses</strong></td><td>₦333,384,741.62</td><td>₦22,800,000.00</td><td>₦23,348,771.50</td><td>₦27,409,154.00</td><td>₦91,295,192.00</td><td>₦147,083,580.12</td><td>₦21,448,044.00</td></tr>
-                                <tr><td><strong>Salary + Bonus</strong></td><td>₦79,454,580.32</td><td>₦7,500,000.00</td><td>₦8,420,000.00</td><td>₦9,479,686.00</td><td>₦16,263,677.00</td><td>₦23,790,770.32</td><td>₦14,000,447.00</td></tr>
-                                <tr><td><strong>TAX</strong></td><td>₦125,081,227.03</td><td>₦6,216,948.08</td><td>₦6,170,729.06</td><td>₦8,471,395.89</td><td>₦24,004,769.00</td><td>₦45,583,530.25</td><td>₦34,633,854.75</td></tr>
-                                <tr><td><strong>Total Staff</strong></td><td>-</td><td>7</td><td>10</td><td>12</td><td>21</td><td>18</td><td>15</td></tr>
-                                <tr><td><strong>Hires / Fired / Resigned</strong></td><td>-</td><td>4 / 2 / 2</td><td>7 / 2 / 10</td><td>6 / 4 / 1</td><td>10 / 2 / 7</td><td>12 / 8 / 3</td><td>9 / 4 / 6</td></tr>
-                                <tr><td><strong>Staff Still With Us</strong></td><td>-</td><td>10</td><td>6</td><td>9</td><td>6</td><td>11</td><td>11</td></tr>
-                                <tr><td><strong>Customers</strong></td><td class="txt-bold">49,510</td><td>2,984</td><td>3,125</td><td>7,150</td><td>14,593</td><td>17,716</td><td>3,942</td></tr>
-                                <tr><td><strong>Return Customers</strong></td><td class="txt-bold">14,599</td><td>597</td><td>702</td><td>1,671</td><td>3,753</td><td>5,669</td><td>2,207</td></tr>
-                                <tr><td><strong>Unit Sold</strong></td><td class="txt-bold">318,157</td><td>4,195</td><td>8,529</td><td>40,878</td><td>101,071</td><td>133,616</td><td>29,868</td></tr>
-                                <tr><td><strong>Net Revenue</strong></td><td class="txt-green">₦1,246,952,531.27</td><td>₦76,675,692.92</td><td>₦77,144,758.44</td><td>₦104,450,551.36</td><td>₦251,608,570.51</td><td class="txt-green">₦561,126,651.79</td><td>₦175,946,306.25</td></tr>
-                                <tr><td><strong>Net 15% Reserves</strong></td><td>₦160,811,466.95</td><td>₦11,501,353.94</td><td>₦11,571,713.77</td><td>₦15,667,582.70</td><td>₦37,741,285.58</td><td>₦84,168,997.77</td><td>₦26,391,945.94</td></tr>
-                                <tr><td><strong>Cost Per New Customer</strong></td><td>₦9,805.43</td><td>₦9,551.74</td><td>₦9,636.31</td><td>₦5,004.41</td><td>₦8,418.96</td><td>₦12,331.98</td><td>₦12,369.11</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <button class="accordion-trigger" onclick="toggleAccordion(this)">Focus on Expenses</button>
-            <div class="accordion-content">
-                <div class="content-inner">
-                    <div class="analysis-block red-brand">
-                        <div class="analysis-title">Expense Allocation & Resource Drain Identification</div>
-                        <div class="analysis-text">
-                            Total cumulative expenditures reached <strong>₦752.40m</strong>. Digital marketing is the primary growth engine, representing <strong>₦333.38m</strong> of total investments.
-                        </div>
-                        <ul class="analysis-bullets">
-                            <li><strong>Logistics Cost Expansion:</strong> Logistics operations required no independent budget lines from 2021 to 2023, but grew to <strong>₦44.45m</strong> in 2024 and peaked at <strong>₦74.47m</strong> in 2025 as fulfillment channels scaled.</li>
-                            <li><strong>H1 2026 Optimization:</strong> Overheads are being tightly managed this year, with total digital marketing costs held to <strong>₦21.45m</strong>, significantly reducing total customer acquisition costs compared to last year.</li>
-                        </ul>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Focus Expense Module</th>
-                                    <th>TOTAL IN 6 YEARS</th>
-                                    <th>2021</th>
-                                    <th>2022</th>
-                                    <th>2023</th>
-                                    <th>2024</th>
-                                    <th>2025</th>
-                                    <th>2026</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td><strong>Gross Expenses</strong></td><td class="txt-red">₦752,397,800.28</td><td>₦40,176,948.08</td><td>₦45,122,746.56</td><td>₦50,000,515.89</td><td>₦201,358,773.00</td><td class="txt-red">₦314,614,285.00</td><td>₦101,124,531.75</td></tr>
-                                <tr><td><strong>Logistics Expenses</strong></td><td>₦137,000,523.00</td><td>₦0.00</td><td>₦0.00</td><td>₦0.00</td><td>₦44,450,254.00</td><td>₦74,474,713.00</td><td>₦18,075,556.00</td></tr>
-                                <tr><td><strong>Digital Expenses</strong></td><td>₦333,384,741.62</td><td>₦22,800,000.00</td><td>₦23,348,771.50</td><td>₦27,409,154.00</td><td>₦91,295,192.00</td><td>₦147,083,580.12</td><td>₦21,448,044.00</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <button class="accordion-trigger" onclick="toggleAccordion(this)">Focus on Customers</button>
-            <div class="accordion-content">
-                <div class="content-inner">
-                    <div class="analysis-block">
-                        <div class="analysis-title">Client Base Vitality & Retention Index Analysis</div>
-                        <div class="analysis-text">
-                            Suruka's pipeline hit high velocity between 2024 and 2025, adding 32,309 customer touchpoints during that period.
-                        </div>
-                        <ul class="analysis-bullets">
-                            <li><strong>Retention Rate Stability:</strong> Retained orders grew from 597 in 2021 to a peak of <strong>5,669 in 2025</strong>. Returning customers accounted for more than half of the active volume in H1 2026 (2,207 out of 3,942), keeping marketing costs highly efficient.</li>
-                            <li><strong>CAC Trend Analysis:</strong> Customer Acquisition Cost hit an all-time low of <strong>₦5,004.41</strong> in 2023 before rising to <strong>₦12,369.11</strong> in 2026, tracking broader trends in digital ad network pricing.</li>
-                        </ul>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Focus Customer Metrics</th>
-                                    <th>TOTAL IN 6 YEARS</th>
-                                    <th>2021</th>
-                                    <th>2022</th>
-                                    <th>2023</th>
-                                    <th>2024</th>
-                                    <th>2025</th>
-                                    <th>2026</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td><strong>Customers Base</strong></td><td class="txt-bold">49,510</td><td>2,984</td><td>3,125</td><td>7,150</td><td>14,593</td><td class="txt-green">17,716</td><td>3,942</td></tr>
-                                <tr><td><strong>Return Customers</strong></td><td class="txt-bold">14,599</td><td>597</td><td>702</td><td>1,671</td><td>3,753</td><td class="txt-green">5,669</td><td>2,207</td></tr>
-                                <tr><td><strong>Cost Per New Customers</strong></td><td>₦9,805.43</td><td>₦9,551.74</td><td>₦9,636.31</td><td class="txt-green">₦5,004.41</td><td>₦8,418.96</td><td>₦12,331.98</td><td>₦12,369.11</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <button class="accordion-trigger" onclick="toggleAccordion(this)">Focus on Ad — This Year</button>
-            <div class="accordion-content">
-                <div class="content-inner">
-                    <div class="analysis-block">
-                        <div class="analysis-title">2026 Media Spend & Acquisition Channel ROI Analytics</div>
-                        <div class="analysis-text">
-                            Marketing performance across H1 2026 generated a total of <strong>₦107,927,537.00</strong> in new customer revenue.
-                        </div>
-                        <ul class="analysis-bullets">
-                            <li><strong>Efficiency Scaling:</strong> Profit margins rose steadily throughout the first half of the year, starting at 240.95% in January and peaking at <strong>635.01% in June</strong>. This was achieved by lowering raw ad spend to ₦869k while continuing to convert the existing customer pipeline.</li>
-                            <li><strong>Creative Asset Investments:</strong> The <strong>₦3.70m</strong> content production layout in May served as a strong foundation, helping optimize conversion rates and drive June's high performance.</li>
-                        </ul>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Month</th>
-                                    <th>AD EXPENSES</th>
-                                    <th>CONTENT EXPENSES</th>
-                                    <th>TOTAL SPENT</th>
-                                    <th>NEW CUSTOMER REVENUE</th>
-                                    <th>PROFIT</th>
-                                    <th>PROFIT %</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>Month</th><th>Ad Expenses</th><th>Content Expenses</th><th>Total Spend</th><th>New Customer Revenue</th><th>Ad Profit</th><th>Ad ROI %</th></tr></thead>
                             <tbody>
                                 <tr><td>January</td><td>₦6,659,444.00</td><td>₦200,000.00</td><td>₦6,859,444.00</td><td>₦23,387,292.00</td><td class="txt-green">₦16,527,848.00</td><td class="txt-green">240.95%</td></tr>
                                 <tr><td>February</td><td>₦4,860,000.00</td><td>₦500,000.00</td><td>₦5,360,000.00</td><td>₦19,570,350.00</td><td class="txt-green">₦14,210,350.00</td><td class="txt-green">265.12%</td></tr>
                                 <tr><td>March</td><td>₦4,138,700.00</td><td>₦0.00</td><td>₦4,138,700.00</td><td>₦19,346,900.00</td><td class="txt-green">₦15,208,200.00</td><td class="txt-green">367.46%</td></tr>
                                 <tr><td>April</td><td>₦3,030,000.00</td><td>₦985,000.00</td><td>₦4,015,000.00</td><td>₦16,201,850.00</td><td class="txt-green">₦12,186,850.00</td><td class="txt-green">303.53%</td></tr>
                                 <tr><td>May</td><td>₦1,890,900.00</td><td>₦3,700,000.00</td><td>₦5,590,900.00</td><td>₦16,859,850.00</td><td class="txt-green">₦11,268,950.00</td><td class="txt-green">201.56%</td></tr>
-                                <tr><td>June</td><td>₦869,000.00</td><td>₦840,000.00</td><td>₦1,709,000.00</td><td>₦12,561,295.00</td><td class="txt-green">₦10,852,295.00</td><td class="txt-green">635.01%</td></tr>
-                                <tr style="color: var(--text-secondary);"><td>July - Dec</td><td>₦0.00</td><td>₦0.00</td><td>₦0.00</td><td>₦0.00</td><td>₦0.00</td><td>0.00%</td></tr>
+                                <tr><td>June</td><td>₦2,185,000.00</td><td>₦1,205,000.00</td><td>₦3,390,000.00</td><td>₦22,614,906.00</td><td class="txt-green">₦19,224,906.00</td><td class="txt-green">567.11%</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -677,46 +157,55 @@
             </div>
         </div>
 
+        <!-- MODULE 3: LAST YEAR -->
         <div class="accordion-item">
-            <button class="accordion-trigger" onclick="toggleAccordion(this)">Focus on Ad — Last 6 Years</button>
+            <button class="accordion-trigger" onclick="toggleAccordion(this)">Last Year — 2025 Historical Baseline</button>
             <div class="accordion-content">
                 <div class="content-inner">
-                    <div class="analysis-block">
-                        <div class="analysis-title">Macro Ad Spend Progression & Strategy Analysis</div>
-                        <div class="analysis-text">
-                            Digital marketing remains a foundational pillar for Suruka's revenue growth, with a total 6-year deployment of <strong>₦333.38m</strong>.
-                        </div>
-                        <ul class="analysis-bullets">
-                            <li><strong>The Hyper-Growth Curve:</strong> Marketing budgets scaled intentionally from 2021 (₦22.80m) through 2024 (₦91.29m), before peaking in 2025 at <strong>₦147.08m</strong> to lock in market share.</li>
-                            <li><strong>Harvesting Phase:</strong> 2026 shows a strategic transition into profit harvesting. The brand is capturing high margin conversions from its deep remarketing pool while maintaining a lean H1 ad layout of <strong>₦21.45m</strong>.</li>
-                        </ul>
-                    </div>
-
                     <div class="table-responsive">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>Macro Component</th>
-                                    <th>TOTAL IN 6 YEARS</th>
-                                    <th>2021</th>
-                                    <th>2022</th>
-                                    <th>2023</th>
-                                    <th>2024</th>
-                                    <th>2025</th>
-                                    <th>2026</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>2025 Month</th><th>Gross Revenue</th><th>Spent Overhead</th><th>Customers</th><th>Unit Sold</th><th>Net Profit</th><th>Profit %</th></tr></thead>
                             <tbody>
-                                <tr>
-                                    <td><strong>Digital Expenses</strong></td>
-                                    <td class="txt-green">₦333,384,741.62</td>
-                                    <td>₦22,800,000.00</td>
-                                    <td>₦23,348,771.50</td>
-                                    <td>₦27,409,154.00</td>
-                                    <td>₦91,295,192.00</td>
-                                    <td class="txt-red">₦147,083,580.12</td>
-                                    <td>₦21,448,044.00</td>
-                                </tr>
+                                <tr><td>January</td><td>₦84,457,862.00</td><td>₦33,298,747.00</td><td>1,773</td><td>11,304</td><td class="txt-green">₦51,159,115.00</td><td class="txt-green">153.64%</td></tr>
+                                <tr><td>February</td><td>₦58,573,477.81</td><td>₦23,331,836.00</td><td>1,173</td><td>7,775</td><td class="txt-green">₦35,241,641.81</td><td class="txt-green">151.05%</td></tr>
+                                <tr><td>March</td><td>₦57,012,782.80</td><td>₦17,499,482.00</td><td>1,139</td><td>8,109</td><td class="txt-green">₦39,513,300.80</td><td class="txt-green">225.80%</td></tr>
+                                <tr><td>April</td><td>₦54,256,321.00</td><td>₦16,182,897.00</td><td>1,052</td><td>7,891</td><td class="txt-green">₦38,073,424.00</td><td class="txt-green">235.27%</td></tr>
+                                <tr><td>May</td><td>₦61,898,519.18</td><td>₦22,998,196.00</td><td>1,270</td><td>9,128</td><td class="txt-green">₦38,900,323.18</td><td class="txt-green">169.15%</td></tr>
+                                <tr><td>June</td><td>₦83,774,649.00</td><td>₦31,660,930.00</td><td>1,901</td><td>14,912</td><td class="txt-green">₦52,113,719.00</td><td class="txt-green">164.60%</td></tr>
+                                <tr><td>July</td><td>₦88,668,142.00</td><td>₦36,514,644.00</td><td>1,735</td><td>13,335</td><td class="txt-green">₦52,153,498.00</td><td class="txt-green">142.83%</td></tr>
+                                <tr><td>August</td><td>₦82,273,322.00</td><td>₦28,683,458.00</td><td>1,585</td><td>11,468</td><td class="txt-green">₦53,589,864.00</td><td class="txt-green">186.83%</td></tr>
+                                <tr><td>September</td><td>₦87,001,381.00</td><td>₦26,121,811.00</td><td>1,729</td><td>13,434</td><td class="txt-green">₦60,879,570.00</td><td class="txt-green">233.06%</td></tr>
+                                <tr><td>October</td><td>₦73,648,478.00</td><td>₦24,298,162.00</td><td>1,511</td><td>12,391</td><td class="txt-green">₦49,350,316.00</td><td class="txt-green">203.10%</td></tr>
+                                <tr><td>November</td><td>₦63,780,693.00</td><td>₦19,769,404.00</td><td>1,198</td><td>9,999</td><td class="txt-green">₦44,011,289.00</td><td class="txt-green">222.62%</td></tr>
+                                <tr><td>December</td><td>₦80,395,309.00</td><td>₦34,254,718.00</td><td>1,624</td><td>13,647</td><td class="txt-green">₦46,140,591.00</td><td class="txt-green">134.70%</td></tr>
+                                <tr style="background-color: #0f172a; font-weight: 800;"><td>TOTAL</td><td>₦875,740,937.00</td><td>₦314,614,285.00</td><td>17,690</td><td>133,393</td><td class="txt-green">₦561,126,652.00</td><td class="txt-green">178.35%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 4: 6-YEAR MACRO MATRIX -->
+        <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)">6-Year Consolidated Macro Matrix</button>
+            <div class="accordion-content">
+                <div class="content-inner">
+                    <div class="table-responsive">
+                        <table>
+                            <thead><tr><th>TAG</th><th>TOTAL (6Y)</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Gross Revenue</strong></td><td class="txt-green">₦2,022,510,693</td><td>₦116.85m</td><td>₦122.27m</td><td>₦154.45m</td><td>₦452.97m</td><td class="txt-green">₦875.74m</td><td>₦300.23m</td></tr>
+                                <tr><td><strong>Gross Expenses</strong></td><td class="txt-red">₦757,145,945</td><td>₦40.18m</td><td>₦45.12m</td><td>₦50.00m</td><td>₦201.36m</td><td class="txt-red">₦314.61m</td><td>₦105.87m</td></tr>
+                                <tr><td><strong>Logistics Expenses</strong></td><td>₦137,000,523</td><td>₦0</td><td>₦0</td><td>₦0</td><td>₦44.45m</td><td>₦74.47m</td><td>₦18.08m</td></tr>
+                                <tr><td><strong>Digital Expenses</strong></td><td>₦334,700,742</td><td>₦22.80m</td><td>₦23.35m</td><td>₦27.41m</td><td>₦91.30m</td><td>₦147.08m</td><td>₦22.76m</td></tr>
+                                <tr><td><strong>Salary + Bonus</strong></td><td>₦79,529,580</td><td>₦7.50m</td><td>₦8.42m</td><td>₦9.48m</td><td>₦16.26m</td><td>₦23.79m</td><td>₦14.08m</td></tr>
+                                <tr><td><strong>TAX</strong></td><td>₦127,976,272</td><td>₦6.22m</td><td>₦6.17m</td><td>₦8.47m</td><td>₦24.00m</td><td>₦45.58m</td><td>₦37.53m</td></tr>
+                                <tr><td><strong>Net Revenue</strong></td><td class="txt-green">₦1,265,364,747</td><td>₦76.68m</td><td>₦77.14m</td><td>₦104.45m</td><td>₦251.61m</td><td class="txt-green">₦561.13m</td><td>₦194.36m</td></tr>
+                                <tr><td><strong>Net 15% Reserves</strong></td><td>₦160,811,467</td><td>₦11.50m</td><td>₦11.57m</td><td>₦15.67m</td><td>₦37.74m</td><td>₦84.17m</td><td>₦29.15m</td></tr>
+                                <tr><td><strong>Customers / Retained</strong></td><td>49,776 / 14,738</td><td>3.0k / 597</td><td>3.1k / 702</td><td>7.2k / 1.7k</td><td>14.6k / 3.8k</td><td>17.7k / 5.7k</td><td>4.2k / 2.3k</td></tr>
+                                <tr><td><strong>Unit Sold</strong></td><td>319,809</td><td>4,195</td><td>8,529</td><td>40,878</td><td>101,071</td><td>133,616</td><td>31,520</td></tr>
+                                <tr><td><strong>CAC (New Acq)</strong></td><td>₦9,844.14</td><td>₦9,551.74</td><td>₦9,636.31</td><td>₦5,004.41</td><td>₦8,418.96</td><td>₦12,331.98</td><td>₦12,245.32</td></tr>
                             </tbody>
                         </table>
                     </div>
